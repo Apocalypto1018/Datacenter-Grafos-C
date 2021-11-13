@@ -4,6 +4,7 @@
 #include <string.h>
 
 struct Datacenter{
+	int id;
 	char codigo[25];
 	char ciudad[25];
 	char pais[25];
@@ -38,7 +39,9 @@ int main(){
 		memset(aux, 0, 80);	
 		control=1;
 		
-        fgets(linea, 80, fichero); 
+        fgets(linea, 80, fichero);
+		
+		datacenters[conCenter].id=conCenter;
 
         if (!feof(fichero)) {
         	
@@ -86,7 +89,7 @@ int main(){
 
     for(i=0;i<conCenter;i++){
     	
-    	printf("\n\nDatacenter %i:\n", i+1);
+    	printf("\n\nDatacenter %i:\n", datacenters[i].id+1);
     	printf("Codigo: %s\n",datacenters[i].codigo);
 	    printf("Ciudad: %s\n",datacenters[i].ciudad);
 	    printf("Pais: %s\n",datacenters[i].pais);
@@ -98,5 +101,4 @@ int main(){
 	fclose(fichero);
 	return 0;
 }
-
 
