@@ -12,8 +12,6 @@ struct Datacenter{
  	char longitud[25];
 };
 
-
-
 int main(){
 	struct Datacenter datacenters[100];
 	int conCenter=-1;
@@ -22,8 +20,10 @@ int main(){
 	char linea[80];
 	char aux[25];
 	int i=0, j=0;
-	int control=1;
+	int control=0;
 	int contador=0;
+	int codigo=0;
+	int pasarUnEspacio=0;
 	
     fichero=fopen("datacenters.txt","rt");
     
@@ -37,7 +37,9 @@ int main(){
 		i=0;
 		conCenter++;
 		memset(aux, 0, 80);	
+		codigo=0;
 		control=1;
+		pasarUnEspacio=0;
 		
         fgets(linea, 80, fichero);
 		
@@ -50,32 +52,47 @@ int main(){
         		aux[j]=linea[i];
         		
         		j++;
-        		
-        		if(linea[i]==' '){
-        			
-        			if(control==1){
-        				strcpy(datacenters[conCenter].codigo, aux);
-        				control++;
-					}else if(control==2){
-        				strcpy(datacenters[conCenter].ciudad, aux);
-        				control++;
-					}else if(control==3){
-        				strcpy(datacenters[conCenter].pais, aux);
-        				control++;
-					}else if(control==4){
-        				strcpy(datacenters[conCenter].latitud, aux);
-        				control++;
-					}
-        			
-        			memset(aux, 0, 25);	
-        			j=0;
+        				
+    			if(control==1 && linea[i]==' '){
+    				strcpy(datacenters[conCenter].codigo, aux);
+    				control++;
+    				
+    				memset(aux, 0, 25);	
+    				j=0;
+    				
+				}else if(control==2 && linea[i]==','){
+    				strcpy(datacenters[conCenter].ciudad, aux);
+    				control++;
+    				
+    				memset(aux, 0, 25);	
+    				j=0;
+    				
+    				pasarUnEspacio=1;
+    			
+				
+				}else if(linea[i]==' ' && pasarUnEspacio==1 && control==3){
+					pasarUnEspacio=2;
 				}
 				
+				else if(control==3 && linea[i]==' ' && pasarUnEspacio==2){
+    				strcpy(datacenters[conCenter].pais, aux);
+    				control++;
+    				
+    				memset(aux, 0, 25);	
+    				j=0;
+    				
+				}else if(control==4 && linea[i]==' ' && pasarUnEspacio==2){
+    				strcpy(datacenters[conCenter].latitud, aux);
+    				control++;
+    				
+    				memset(aux, 0, 25);	
+    				j=0;
+				}
+    			
 				i++;
 				
 				if(linea[i]=='\n'){
     				strcpy(datacenters[conCenter].longitud, aux);
-    				control++;
     				memset(aux, 0, 25);	
     				j=0;
 				}
