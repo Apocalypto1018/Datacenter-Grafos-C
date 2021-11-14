@@ -70,7 +70,7 @@ void arbolExpansionMinima(float matriz[conCenter][conCenter]){
 			for(j= 0; j<conCenter-1; j++){
 				//if(visitado[i]==true) continue;
 				printf("matriz %.2f minimo %.2f \n", matriz[i][j], minimo);
-				if(matriz[i][j] == 0) continue;
+				if(i == j) continue;
 				if(matriz[i][j] < matriz[i][locacion]){
 					minimo = matriz[i][j];
 					locacion=j;
