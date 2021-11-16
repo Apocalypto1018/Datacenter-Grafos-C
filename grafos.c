@@ -68,16 +68,18 @@ void arbolExpansionMinima(float matriz[conCenter][conCenter]){
 		minimo=0;
 			for(j= 0; j<conCenter-1; j++){
 				//if(visitado[i]==true) continue;
-				printf("matriz %.2f minimo %.2f \n", matriz[i][j], minimo);
+				printf(" minimo %.2f \n", minimo);
 				if(i == j) continue;
 				if(matriz[i][j] < matriz[i][locacion]){
+				//if(matriz[i][j] && visitado[j]== false && matriz[i][j] < expansion[j]){
+					
 					minimo = matriz[i][j];
 					locacion=j;
 					visitado[i]=j;
 				}
 				
 				expansion[i]=locacion;
-				printf(" %d expa ", expansion[i]);
+				printf("pos: %d ", expansion[i]);
 			}
 		
 		
@@ -201,6 +203,7 @@ int main(){
 	float matrizaux[conCenter][conCenter];
 	j=0;
 	i=0;
+	//se imprime la matriz que, donde se indica la distancia de cada datacenters respecto a los otros
 	for(i=1; i<conCenter-1;i++){
 		for( j=1; j<conCenter-1;j++){
 			matriz[i][j]= devolverKM(atof(datacenters[i].latitud), atof(datacenters[i].longitud),atof(datacenters[j].latitud),atof(datacenters[j].longitud));
