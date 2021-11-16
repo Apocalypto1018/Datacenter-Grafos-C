@@ -66,7 +66,6 @@ void arbolExpansionMinima(float matriz[conCenter][conCenter]){
 	}
 	for(i = 0; i<conCenter-1; i++){
 		minimo=0;
-		printf("MALDITA SEA  %f", minimo);
 			for(j= 0; j<conCenter-1; j++){
 				//if(visitado[i]==true) continue;
 				printf("matriz %.2f minimo %.2f \n", matriz[i][j], minimo);
@@ -74,6 +73,7 @@ void arbolExpansionMinima(float matriz[conCenter][conCenter]){
 				if(matriz[i][j] < matriz[i][locacion]){
 					minimo = matriz[i][j];
 					locacion=j;
+					visitado[i]=j;
 				}
 				
 				expansion[i]=locacion;
@@ -81,6 +81,10 @@ void arbolExpansionMinima(float matriz[conCenter][conCenter]){
 			}
 		
 		
+	}
+	
+	for(i=0; i<conCenter; i++){
+		printf("\n %d %d" , expansion[i], i);
 	}
 }
 
@@ -197,8 +201,8 @@ int main(){
 	float matrizaux[conCenter][conCenter];
 	j=0;
 	i=0;
-	for(i=0; i<conCenter-1;i++){
-		for( j=0; j<conCenter-1;j++){
+	for(i=1; i<conCenter-1;i++){
+		for( j=1; j<conCenter-1;j++){
 			matriz[i][j]= devolverKM(atof(datacenters[i].latitud), atof(datacenters[i].longitud),atof(datacenters[j].latitud),atof(datacenters[j].longitud));
 			matrizaux[i][j]= devolverKM(atof(datacenters[i].latitud), atof(datacenters[i].longitud),atof(datacenters[j].latitud),atof(datacenters[j].longitud));
 			printf("%.2f ", matriz[i][j]);
@@ -217,4 +221,3 @@ int main(){
 	
 	return 0;
 }
-
